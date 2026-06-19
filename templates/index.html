@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌤 Weather Dashboard</h1>
+
+        <form>
+            <input
+                type="text"
+                placeholder="Enter City Name">
+
+            <button>
+                Search
+            </button>
+        </form>
+
+        <div class="weather-card">
+
+            <h2>Ahmedabad</h2>
+
+            <h3>32°C</h3>
+
+            <p>Clear Sky</p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
