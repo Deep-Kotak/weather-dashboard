@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Weather Dashboard</title>
 
@@ -13,27 +14,40 @@
 
         <h1>🌤 Weather Dashboard</h1>
 
-        <form>
+        <form method="POST">
+
             <input
                 type="text"
-                placeholder="Enter City Name">
+                name="city"
+                placeholder="Enter City Name"
+                required>
 
-            <button>
+            <button type="submit">
                 Search
             </button>
+
         </form>
+
+        {% if weather %}
 
         <div class="weather-card">
 
-            <h2>Ahmedabad</h2>
+            <h2>{{ weather.city }}</h2>
 
-            <h3>32°C</h3>
+            <h3>{{ weather.temp }} °C</h3>
 
-            <p>Clear Sky</p>
+            <p>{{ weather.condition }}</p>
+
+            <p>Humidity: {{ weather.humidity }}%</p>
+
+            <p>Wind Speed: {{ weather.wind }} m/s</p>
 
         </div>
+
+        {% endif %}
 
     </div>
 
 </body>
+
 </html>
