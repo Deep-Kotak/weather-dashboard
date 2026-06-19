@@ -27,24 +27,34 @@
             </button>
 
         </form>
+        {% if error %}
 
-        {% if weather %}
+<div class="error-box">
+    {{ error }}
+</div>
 
-        <div class="weather-card">
+{% endif %}
 
-            <h2>{{ weather.city }}</h2>
+      {% if weather %}
 
-            <h3>{{ weather.temp }} °C</h3>
+<div class="weather-card">
 
-            <p>{{ weather.condition }}</p>
+    <h2>{{ weather.city }}</h2>
 
-            <p>Humidity: {{ weather.humidity }}%</p>
+    <img
+    src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
 
-            <p>Wind Speed: {{ weather.wind }} m/s</p>
+    <h3>{{ weather.temp }} °C</h3>
 
-        </div>
+    <p>{{ weather.condition }}</p>
 
-        {% endif %}
+    <p>Humidity: {{ weather.humidity }}%</p>
+
+    <p>Wind Speed: {{ weather.wind }} m/s</p>
+
+</div>
+
+{% endif %}
 
     </div>
 
