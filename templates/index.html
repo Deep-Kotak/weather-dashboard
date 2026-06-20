@@ -10,54 +10,81 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>🌤 Weather Dashboard</h1>
+    <h1>🌤 Weather Dashboard</h1>
 
-        <form method="POST">
+    <form method="POST">
 
-            <input
-                type="text"
-                name="city"
-                placeholder="Enter City Name"
-                required>
+        <input
+            type="text"
+            name="city"
+            placeholder="Enter City Name"
+            required>
 
-            <button type="submit">
-                Search
-            </button>
+        <button type="submit">
+            Search
+        </button>
 
-        </form>
-        {% if error %}
+    </form>
 
-<div class="error-box">
-    {{ error }}
-</div>
+    {% if error %}
 
-{% endif %}
+    <div class="error-box">
+        {{ error }}
+    </div>
 
-      {% if weather %}
+    {% endif %}
 
-<div class="weather-card">
+    {% if weather %}
 
-    <h2>{{ weather.city }}</h2>
+    <div class="weather-card">
 
-    <img
-    src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
+        <h2>{{ weather.city }}</h2>
 
-    <h3>{{ weather.temp }} °C</h3>
+        <img
+        src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
 
-    <p>{{ weather.condition }}</p>
+        <h3>{{ weather.temp }} °C</h3>
 
-    <p>Humidity: {{ weather.humidity }}%</p>
+        <p>{{ weather.condition }}</p>
 
-    <p>Wind Speed: {{ weather.wind }} m/s</p>
+        <p>Humidity: {{ weather.humidity }}%</p>
 
-</div>
-
-{% endif %}
+        <p>Wind Speed: {{ weather.wind }} m/s</p>
 
     </div>
 
-</body>
+    {% endif %}
 
+    {% if forecast %}
+
+    <h2 class="forecast-title">
+        5 Day Forecast
+    </h2>
+
+    <div class="forecast-container">
+
+        {% for day in forecast %}
+
+        <div class="forecast-card">
+
+            <p>{{ day.date }}</p>
+
+            <img
+            src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png">
+
+            <h3>{{ day.temp }} °C</h3>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
 </html>
