@@ -138,3 +138,20 @@ button:hover {
     font-weight: bold;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
+
+.clear-history {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.clear-history a {
+    text-decoration: none;
+    background: #ef4444;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.clear-history a:hover {
+    background: #dc2626;
+}
