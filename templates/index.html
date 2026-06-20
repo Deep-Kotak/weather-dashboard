@@ -11,7 +11,8 @@
 <body>
 
 <div class="container">
-<h1>☁️ Weather Dashboard</h1>
+
+    <h1>☁️ Weather Dashboard</h1>
 
     <form method="POST">
 
@@ -75,6 +76,26 @@
 
             <h3>{{ day.temp }} °C</h3>
 
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+    {% if history %}
+
+    <h2 class="history-title">
+        Recent Searches
+    </h2>
+
+    <div class="history-container">
+
+        {% for city in history %}
+
+        <div class="history-card">
+            {{ city }}
         </div>
 
         {% endfor %}
