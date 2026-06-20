@@ -1,118 +1,82 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Weather Dashboard</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
 
 <div class="container">
 
-    <h1>☁️ Weather Dashboard</h1>
+  <!-- HEADER -->
+  <header class="header">
+    <p class="header-eyebrow">Live Weather Intelligence</p>
+    <h1>☁ Sky<span>Watch</span></h1>
+  </header>
 
-    <form method="POST">
+  <!-- SEARCH FORM -->
+  <form class="search-wrap" method="POST">
+    <input type="text" name="city" placeholder="Search any city…" required>
+    <button type="submit">Search →</button>
+  </form>
 
-        <input
-            type="text"
-            name="city"
-            placeholder="Enter City Name"
-            required>
+  <!-- ERROR -->
+  {% if error %}
+  <div class="error-box">⚠ {{ error }}</div>
+  {% endif %}
 
-        <button type="submit">
-            Search
-        </button>
-
-    </form>
-
-    {% if error %}
-
-    <div class="error-box">
-        {{ error }}
+  <!-- CURRENT WEATHER CARD -->
+  {% if weather %}
+  <div class="weather-card frost-card">
+    <div class="weather-city">{{ weather.city }}</div>
+    <div class="weather-condition">{{ weather.condition }}</div>
+    <div class="weather-stats">
+      <div class="stat">
+        <span class="stat-label">Humidity</span>
+        <span class="stat-value">{{ weather.humidity }}%</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Wind</span>
+        <span class="stat-value">{{ weather.wind }} m/s</span>
+      </div>
     </div>
-
-    {% endif %}
-
-    {% if weather %}
-
-    <div class="weather-card">
-
-        <h2>{{ weather.city }}</h2>
-
-        <img
-        src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
-
-        <h3>{{ weather.temp }} °C</h3>
-
-        <p>{{ weather.condition }}</p>
-
-        <p>Humidity: {{ weather.humidity }}%</p>
-
-        <p>Wind Speed: {{ weather.wind }} m/s</p>
-
+    <div class="weather-right">
+      <img class="weather-icon" src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="{{ weather.condition }}">
+      <div class="weather-temp">{{ weather.temp }}<span class="weather-unit">°C</span></div>
     </div>
+  </div>
+  {% endif %}
 
-    {% endif %}
-
-    {% if forecast %}
-
-    <h2 class="forecast-title">
-        5 Day Forecast
-    </h2>
-
-    <div class="forecast-container">
-
-        {% for day in forecast %}
-
-        <div class="forecast-card">
-
-            <p>{{ day.date }}</p>
-
-            <img
-            src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png">
-
-            <h3>{{ day.temp }} °C</h3>
-
-        </div>
-
-        {% endfor %}
-
+  <!-- 5-DAY FORECAST -->
+  {% if forecast %}
+  <p class="section-title">5-Day Forecast</p>
+  <div class="forecast-grid">
+    {% for day in forecast %}
+    <div class="forecast-card frost-card">
+      <span class="forecast-date">{{ day.date }}</span>
+      <img class="forecast-icon" src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="weather icon">
+      <span class="forecast-temp">{{ day.temp }}°</span>
     </div>
+    {% endfor %}
+  </div>
+  {% endif %}
 
-    {% endif %}
-
-    {% if history %}
-
-
-<div class="clear-history">
-
-    <a href="/clear-history">
-        Clear History
-    </a>
-
-</div>
-
-
-    <h2 class="history-title">
-        Recent Searches
-    </h2>
-
-    <div class="history-container">
-
-        {% for city in history %}
-
-        <div class="history-card">
-            {{ city }}
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-    {% endif %}
+  <!-- SEARCH HISTORY -->
+  {% if history %}
+  <div class="clear-btn-wrap">
+    <a class="clear-btn" href="/clear-history">✕ Clear History</a>
+  </div>
+  <p class="section-title">Recent Searches</p>
+  <div class="history-row">
+    {% for city in history %}
+    <div class="history-chip frost-card">{{ city }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
 
 </div>
 
